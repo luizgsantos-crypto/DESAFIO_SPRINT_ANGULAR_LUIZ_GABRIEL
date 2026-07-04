@@ -1,0 +1,133 @@
+<nav class="navbar ford-navbar px-4 py-3">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <span class="navbar-brand text-white fw-bold mb-0 h1">FORD SISTEMAS</span>
+    <div class="text-white d-flex align-items-center gap-4">
+      <a routerLink="/home" class="text-white text-decoration-none">Home</a>
+      <span>Olá, <b>{{ nomeUsuario }}</b></span>
+      <button class="btn btn-outline-light btn-sm px-3" (click)="sair()">Sair</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4 mb-5">
+  <h3 class="mb-4 title-ford">Dashboard FORD</h3>
+
+  <div class="row g-4">
+    <!-- Seletor de veículo -->
+    <div class="col-12 col-lg-3">
+      <div class="card ford-panel h-100 p-3">
+        <label class="form-label fw-bold">Veículo</label>
+        <input
+          type="text"
+          class="form-control mb-3"
+          [(ngModel)]="filtroVeiculo"
+          placeholder="Buscar veículo...">
+
+        <div class="list-group vehicle-list">
+          @for (v of veiculosFiltrados; track v.id) {
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              [ngClass]="corPorNome(v.vehicle)"
+              [class.active]="veiculoSelecionado?.id === v.id"
+              (click)="selecionarVeiculo(v)">
+              {{ v.vehicle }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards de indicadores + imagem do veículo -->
+    <div class="col-12 col-lg-9">
+      <div class="row g-4 mb-4">
+        <div class="col-12 col-md-4">
+          <div class="card ford-panel p-3 h-100">
+            <span class="text-muted small">Total de Vendas</span>
+            <h3 class="fw-bold mb-0">
+              {{ veiculoSelecionado?.volumetotal | number }} <small class="fs-6 fw-normal">und.</small>
+            </h3>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="card ford-panel p-3 h-100">
+            <span class="text-muted small">Conectados</span>
+            <h3 class="fw-bold mb-0">
+              {{ veiculoSelecionado?.connected | number }} <small class="fs-6 fw-normal">und.</small>
+            </h3>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="card ford-panel p-3 h-100">
+            <span class="text-muted small">Update Software</span>
+            <h3 class="fw-bold mb-0">
+              {{ veiculoSelecionado?.softwareUpdates | number }} <small class="fs-6 fw-normal">und.</small>
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      @if (veiculoSelecionado) {
+        <div class="card ford-panel p-4 text-center vehicle-showcase">
+          <span class="badge align-self-start mb-3 text-uppercase" [ngClass]="corPorNome(veiculoSelecionado.vehicle)">{{ veiculoSelecionado.vehicle }}</span>
+          <img [src]="veiculoSelecionado.img" [alt]="veiculoSelecionado.vehicle" class="vehicle-image">
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Telemetria por código do veículo -->
+  <div class="card ford-panel mt-4 p-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+      <h5 class="mb-0 fw-bold">Telemetria por código do veículo</h5>
+      <div class="input-group telemetry-search">
+        <span class="input-group-text bg-white">🔍</span>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="vinBusca"
+          (keyup.enter)="buscarTelemetria()"
+          placeholder="Ex.: 2FRHDUYS2Y63NHD22454">
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table align-middle mb-0">
+        <thead>
+          <tr class="text-muted small text-uppercase">
+            <th>Código - Vin</th>
+            <th>Odômetro</th>
+            <th>Nível de Combustível</th>
+            <th>Status</th>
+            <th>Lat.</th>
+            <th>Long.</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (resultadosTelemetria.length) {
+            @for (t of resultadosTelemetria; track t.vin) {
+              <tr>
+                <td>{{ t.vin }}</td>
+                <td>{{ t.odometro | number }}</td>
+                <td>{{ t.nivelCombustivel }}%</td>
+                <td>
+                  <span class="badge" [ngClass]="t.status === 'on' ? 'bg-success' : 'bg-danger'">
+                    {{ t.status === 'on' ? 'Ligado' : 'Desligado' }}
+                  </span>
+                </td>
+                <td>{{ t.lat }}</td>
+                <td>{{ t.long }}</td>
+              </tr>
+            }
+          } @else {
+            <tr>
+              <td colspan="6" class="text-center text-muted py-4">
+                Nenhum veículo pesquisado ainda. Informe um código VIN acima.
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

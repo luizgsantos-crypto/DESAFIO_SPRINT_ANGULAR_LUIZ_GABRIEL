@@ -1,0 +1,26 @@
+<nav class="navbar ford-navbar px-4 py-3">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <span class="navbar-brand text-white fw-bold mb-0 h1">FORD SISTEMAS</span>
+    <div class="text-white d-flex align-items-center gap-4">
+      <a routerLink="/dashboard" class="text-white text-decoration-none">Dashboard</a>
+      <button class="btn btn-outline-light btn-sm px-3" (click)="sair()">Sair</button>
+    </div>
+  </div>
+</nav>
+
+<div class="home-hero d-flex align-items-center">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-12 col-lg-5">
+        <div class="card welcome-card shadow p-4">
+          <h4 class="fw-bold text-ford mb-1">SISTEMA DE GESTÃO FORD</h4>
+          <p class="text-muted mb-4">Seja bem-vindo(a){{ nomeUsuario ? ', ' + nomeUsuario : '' }}!</p>
+          <button class="btn btn-ford w-100" (click)="irParaDashboard()">Acessar Dashboard</button>
+        </div>
+      </div>
+      <div class="col-12 col-lg-7 text-center d-none d-lg-block">
+        <img src="http://localhost:3001/img/ranger.png" alt="Ford Ranger" class="hero-image">
+      </div>
+    </div>
+  </div>
+</div>

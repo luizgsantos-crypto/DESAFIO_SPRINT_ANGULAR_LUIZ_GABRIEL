@@ -1,0 +1,25 @@
+/* As cores vêm de src/styles.scss (variáveis --ford-*) */
+
+.home-hero {
+  min-height: calc(100vh - 72px);
+  background-color: var(--ford-bg);
+}
+
+.welcome-card {
+  border: none;
+  border-top: 4px solid var(--ford-blue);
+  border-radius: 12px;
+  background-color: var(--ford-surface);
+  box-shadow: var(--ford-shadow-md);
+}
+
+.text-ford {
+  color: var(--ford-black);
+}
+
+.hero-image {
+  max-width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  filter: drop-shadow(var(--ford-shadow-md));
+}

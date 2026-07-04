@@ -1,0 +1,11 @@
+/* As cores vêm de src/styles.scss (variáveis --ford-*) */
+
+.login-bg {
+  background-color: var(--ford-bg);
+}
+
+.card {
+  border: none;
+  border-top: 4px solid var(--ford-blue);
+  box-shadow: var(--ford-shadow-md);
+}

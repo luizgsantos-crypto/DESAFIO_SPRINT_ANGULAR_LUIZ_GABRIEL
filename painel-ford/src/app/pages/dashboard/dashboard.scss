@@ -1,0 +1,93 @@
+/* As cores vêm de src/styles.scss (variáveis --ford-*) */
+
+.title-ford {
+  color: var(--ford-black);
+  font-weight: 700;
+  border-left: 5px solid var(--ford-blue);
+  padding-left: 10px;
+}
+
+.ford-panel {
+  border: none;
+  border-radius: 12px;
+  background-color: var(--ford-surface);
+  box-shadow: var(--ford-shadow-sm);
+  transition: box-shadow 0.25s ease;
+
+  &:hover {
+    box-shadow: var(--ford-shadow-md);
+  }
+}
+
+/* ============================================================
+   LISTA DE VEÍCULOS — cada item ganha a cor de identidade do
+   modelo (usada na borda esquerda e no fundo quando selecionado).
+   Ranger = laranja | Territory = azul claro | Mustang = preto | Bronco Sport = vermelho
+   ============================================================ */
+.vehicle-list {
+  .list-group-item {
+    border: 1px solid var(--ford-border);
+    border-left-width: 4px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    color: var(--ford-text);
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+
+    &:hover:not(.active) {
+      background-color: var(--ford-bg);
+    }
+
+    /* Cor de identidade de cada modelo (borda esquerda sempre visível) */
+    &.cor-ranger { border-left-color: #e8590c; }
+    &.cor-territory { border-left-color: #2f9be0; }
+    &.cor-mustang { border-left-color: var(--ford-black); }
+    &.cor-bronco { border-left-color: #c62828; }
+    &.cor-padrao { border-left-color: var(--ford-black); }
+
+    /* Quando selecionado, o fundo inteiro vira a cor do modelo */
+    &.active {
+      color: #ffffff;
+
+      &.cor-ranger { background-color: #e8590c; border-color: #e8590c; }
+      &.cor-territory { background-color: #2f9be0; border-color: #2f9be0; }
+      &.cor-mustang { background-color: var(--ford-black); border-color: var(--ford-black); }
+      &.cor-bronco { background-color: #c62828; border-color: #c62828; }
+      &.cor-padrao { background-color: var(--ford-black); border-color: var(--ford-black); }
+    }
+  }
+}
+
+/* ============================================================
+   BADGE COM O NOME DO MODELO (acima da imagem do veículo)
+   Segue a mesma cor de identidade do modelo.
+   ============================================================ */
+.badge {
+  &.cor-ranger { background-color: #e8590c; color: #ffffff; }
+  &.cor-territory { background-color: #2f9be0; color: #ffffff; }
+  &.cor-mustang { background-color: var(--ford-black); color: #ffffff; }
+  &.cor-bronco { background-color: #c62828; color: #ffffff; }
+  &.cor-padrao { background-color: var(--ford-black); color: #ffffff; }
+}
+
+.vehicle-showcase {
+  .vehicle-image {
+    max-height: 260px;
+    object-fit: contain;
+    filter: drop-shadow(var(--ford-shadow-sm));
+  }
+}
+
+.telemetry-search {
+  max-width: 320px;
+}
+
+/* Deixa os badges de status (Ligado/Desligado) alinhados à paleta */
+.badge.bg-success {
+  background-color: var(--ford-success) !important;
+}
+
+.badge.bg-danger {
+  background-color: var(--ford-danger) !important;
+}
